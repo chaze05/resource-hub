@@ -15,10 +15,10 @@ async function writeDb(data: any[]) {
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const resources = await readDb();
     const filteredResources = resources.filter((resource: any) => resource.id !== id);
 
